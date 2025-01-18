@@ -44,12 +44,11 @@ button {
   font-weight: bold;
   cursor: pointer;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  box-shadow: 0 8px 15px rgba(31, 36, 127, 0.3);
+  box-shadow: 0 8px 15px rgba(31, 36, 127, 0.1);
 }
 
 button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 25px rgba(31, 36, 127, 0.5);
+  transform: scale(1.15);
 }
 
 form {
@@ -110,4 +109,18 @@ p {
   font-size: 1.2rem;
   color: #ff4500;
   margin: 1rem 0;
+}
+
+.shreddit-logo:hover {
+  color: red;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.2), 
+               0 0 20px rgba(255, 0, 0, 0.1), 
+               0 0 30px rgba(255, 0, 0, 0.3);
+  transition: all 1s ease;
+  transform: scale(1.3);
+}
+
+.shreddit-logo {
+  transition: all 0.5s ease;
+  text-shadow: null;
 }

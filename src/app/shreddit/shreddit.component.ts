@@ -27,7 +27,7 @@ export class ShredditComponent implements OnInit {
 
   @HostListener('window:scroll', [])
   onScroll(): void {
-    const scrollThreshold = 1050; // Artificial loading extension
+    const scrollThreshold = 2500; // Artificial loading extension
     const currentScrollPosition = window.innerHeight + window.scrollY;
     const documentHeight = document.body.offsetHeight;
 
@@ -83,7 +83,7 @@ export class ShredditComponent implements OnInit {
   }
 
   getUpvoteColor(ups: number): string {
-    if (ups > 100) return '#FFD700'; // Gold
+    if (ups > 100) return '#CCAC00'; // Gold
     if (ups > 20) return '#4CAF50'; // Green
     if (ups > 0) return '#353a95'; // Blue
     return '#808080'; // Gray

@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-login',
   template: `
       <form (submit)="onSubmit($event)">
-        <h1> Shreddit </h1>
+        <h1 class="shreddit-logo"> Shreddit </h1>
         <input type="text" id="username" [(ngModel)]="username" name="username" placeholder="Enter Username" required />
         <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="Enter Password" required />
         <button type="submit">Login</button>
@@ -29,7 +29,7 @@ export class LoginComponent {
 
   onSubmit(event: Event): void {
     event.preventDefault();
-    if (this.userService.login(this.username, this.password) || true) {
+    if (this.userService.login(this.username, this.password)) {
       this.router.navigate(['/shreddit']);
     } else {
       this.error = 'Invalid username or password';
