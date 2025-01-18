@@ -103,7 +103,7 @@ p {
   margin-top: 1rem;
   color: #d9534f;
   font-weight: bold;
-  animation: shake 0.5s ease-in-out;
+  animation: shake 0.1s ease-in-out;
 }
 
 @keyframes shake {

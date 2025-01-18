@@ -14,4 +14,8 @@ export class ShredditService {
     const url = after ? `${this.baseUrl}?after=${after}` : this.baseUrl;
     return this.http.get(url);
   }
+
+  getComments(postId: string): Observable<any> {
+    return this.http.get(`https://www.reddit.com/comments/${postId}.json`);
+  }
 }

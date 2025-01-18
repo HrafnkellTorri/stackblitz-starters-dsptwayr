@@ -13,10 +13,10 @@ import { ShredditService } from '../services/shreddit.service';
 })
 export class ShredditComponent implements OnInit {
   posts: any[] = [];
-  after: string = ''; // Tracks the 'after' token for pagination
+  after: string = '';
   isLoading: boolean = false;
-  error: string | null = null; // Tracks errors during data fetching
-  selectedPost: any = null; // Tracks the selected post for details view
+  error: string | null = null;
+  selectedPost: any = null;
 
   constructor(private shredditService: ShredditService) {}
 
@@ -26,7 +26,7 @@ export class ShredditComponent implements OnInit {
 
   @HostListener('window:scroll', [])
   onScroll(): void {
-    const scrollThreshold = 1050;
+    const scrollThreshold = 1050; //artifical loading extention, hopefully wont bug anything.
     const currentScrollPosition = window.innerHeight + window.scrollY;
     const documentHeight = document.body.offsetHeight;
 
@@ -60,29 +60,41 @@ export class ShredditComponent implements OnInit {
     window.location.href = '/login';
   }
 
-  getPostImageUrl(post: any): string {
+  getPostImageUrl(post: any, usePlaceholder: boolean = true): string | null {
     if (post.preview && post.preview.images && post.preview.images.length > 0) {
       const imageUrl = post.preview.images[0].source.url;
       if (imageUrl) {
         return imageUrl.replaceAll('&amp;', '&');
       }
     }
-    return 'https://coffective.com/wp-content/uploads/2018/06/default-featured-image.png.jpg';
+    return usePlaceholder
+      ? 'https://coffective.com/wp-content/uploads/2018/06/default-featured-image.png.jpg'
+      : null;
   }
 
   getUpvoteColor(ups: number): string {
     if (ups > 100) {
-      return '#FFD700'; // Gold
+      return '#FFD700'; // Goldish
     } else if (ups > 20) {
-      return '#4CAF50'; // Green
+      return '#4CAF50'; // green
     } else if (ups > 0) {
       return '#353a95'; // Blue
     }
-    return '#808080'; // Gray
+    return '#808080'; //gray default
   }
 
   openPostDetails(post: any): void {
     this.selectedPost = post;
+  
+    this.shredditService.getComments(post.id).subscribe(
+      (data: any) => {
+        this.selectedPost.comments = data[1].data.children.map((child: any) => child.data);
+      },
+      (error) => {
+        console.error('Error fetching comments:', error);
+        this.selectedPost.comments = [];
+      }
+    );
   }
 
   closePostDetails(): void {

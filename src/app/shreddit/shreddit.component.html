@@ -28,6 +28,9 @@
           alt="Post Image"
           class="post-image"
         />
+        <div class="image-popup">
+          <img [src]="getPostImageUrl(post)" alt="Preview Image" />
+        </div>
       </div>
     </li>
   </ul>
@@ -37,18 +40,30 @@
   <div class="post-details-container">
     <button (click)="closePostDetails()">Back</button>
     <h3>{{ selectedPost.title }}</h3>
-    <p [style.color]="getUpvoteColor(selectedPost.ups)">
-      ▲ {{ selectedPost.ups }}
-    </p>
+    <p [style.color]="getUpvoteColor(selectedPost.ups)">▲ {{ selectedPost.ups }}</p>
     <p>Comments: {{ selectedPost.num_comments }}</p>
-    <p>{{ selectedPost.selftext || 'No additional content available.' }}</p>
+    <p>{{ selectedPost.selftext || '' }}</p>
 
-    <div class="post-image-container">
-      <img
-        [src]="getPostImageUrl(selectedPost)"
+    <div
+      *ngIf="getPostImageUrl(selectedPost, false)"
+      class="post-image-container"
+    >
+      <img [src]="getPostImageUrl(selectedPost, false)"
         alt="Post Image"
-        class="post-image"
-      />
+        class="post-image-detailed"/>
+    </div>
+
+    <div class="comments-container" *ngIf="selectedPost.comments && selectedPost.comments.length">
+      <h4>Comments</h4>
+      <ul>
+        <li *ngFor="let comment of selectedPost.comments" class="comment">
+          <p><strong class="comment-author">{{ comment.author }}</strong>: {{ comment.body }}</p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="no-comments" *ngIf="!selectedPost.comments || !selectedPost.comments.length">
+      <p>No comments available.</p>
     </div>
   </div>
 </ng-container>
