@@ -43,15 +43,6 @@
   <div class="post-details-container" (click)="$event.stopPropagation()">
     <h3>{{ selectedPost.title }}</h3>
 
-    <div class="post-statistics">
-      <p class="statistics">
-        <strong>Author</strong>: {{ selectedPost.author }}
-      </p>
-      <p class="statistics">
-        <strong>Created</strong>: {{ selectedPost.created_utc * 1000 | date: 'medium' }}
-      </p>
-    </div>
-    
     <p [innerHTML]="formatSelfText(selectedPost.selftext)"></p>
 
     <div *ngIf="getPostImageUrl(selectedPost, false)" class="post-image-container">
@@ -63,6 +54,13 @@
         {{ selectedPost.url }}
       </a>
     </div>
+
+    <p class="statistics">
+      <strong>Author</strong>: {{ selectedPost.author }}
+    </p>
+    <p class="statistics">
+      <strong>Created</strong>: {{ selectedPost.created_utc * 1000 | date: 'medium' }}
+    </p>
 
     <p [style.color]="getUpvoteColor(selectedPost.ups)">▲ {{ selectedPost.ups }}</p>
 

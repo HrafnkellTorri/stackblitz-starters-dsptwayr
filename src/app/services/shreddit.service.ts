@@ -15,7 +15,17 @@ export class ShredditService {
     return this.http.get(url);
   }
 
-  getComments(postId: string): Observable<any> {
-    return this.http.get(`https://www.reddit.com/comments/${postId}.json`);
+getComments(postId: string): Observable<any> {
+  // Log the request URL for debugging purposes
+  console.log(`Fetching comments for post with ID: ${postId}`);
+
+  // Construct the URL for the Reddit comments API
+  const url = `https://www.reddit.com/comments/${postId}.json`;
+
+  // Log the request URL
+  console.log(`Requesting comments from: ${url}`);
+
+  return this.http.get(`https://www.reddit.com/comments/${postId}.json`);
+
   }
 }

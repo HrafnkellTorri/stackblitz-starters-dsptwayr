@@ -312,7 +312,7 @@ li:hover {
   z-index: 1001;
 }
 
-.post-statistics .statistics {
+.post-details-container p.statistics {
   font-weight: bold;
   color: rgb(53, 58, 149);
   margin-right: 0.5rem;
