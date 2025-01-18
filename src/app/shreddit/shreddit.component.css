@@ -1,7 +1,7 @@
 h2 {
   text-align: center;
   font-size: 3rem;
-  margin-bottom: 1rem;
+  margin: 20px;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
@@ -213,7 +213,7 @@ li:hover {
   padding: 1.5rem;
   background: #f9f9f9;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 11px 12px rgba(0, 0, 0, 0.1)
 }
 
 .post-details-container h3 {
@@ -259,6 +259,11 @@ li:hover {
   border-radius: 8px;
 }
 
+.post-image-detailed {
+  object-fit: contain;
+  width: 100%;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -277,4 +282,37 @@ li:hover {
 
 .comment-author:hover {
   color: #e03e00;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.093);
+  z-index: 1000;
+}
+
+.post-details-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  z-index: 1001;
+}
+
+.shreddit-logo:hover {
+  color: red;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.2), 
+               0 0 20px rgba(255, 0, 0, 0.1), 
+               0 0 30px rgba(255, 0, 0, 0.3);
 }

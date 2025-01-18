@@ -10,8 +10,8 @@
   <p>No posts available. Try again later.</p>
 </div>
 
-<ng-container *ngIf="!selectedPost">
-  <h2>Shreddit</h2>
+<ng-container *ngIf="!isLoading">
+  <h2 class="shreddit-logo">Shreddit</h2>
   <button (click)="navigate()">Log out</button>
 
   <ul>
@@ -32,24 +32,26 @@
           <img [src]="getPostImageUrl(post)" alt="Preview Image" />
         </div>
       </div>
+      
     </li>
   </ul>
 </ng-container>
 
 <ng-container *ngIf="selectedPost">
-  <div class="post-details-container">
-    <button (click)="closePostDetails()">Back</button>
+  <div class="overlay" (click)="closePostDetails()"></div>
+  <div class="post-details-container" (click)="$event.stopPropagation()">
     <h3>{{ selectedPost.title }}</h3>
     <p [style.color]="getUpvoteColor(selectedPost.ups)">▲ {{ selectedPost.ups }}</p>
     <p [innerHTML]="formatSelfText(selectedPost.selftext)"></p>
 
-    <div
-      *ngIf="getPostImageUrl(selectedPost, false)"
-      class="post-image-container"
-    >
-      <img [src]="getPostImageUrl(selectedPost, false)"
-        alt="Post Image"
-        class="post-image-detailed"/>
+    <div *ngIf="getPostImageUrl(selectedPost, false)" class="post-image-container">
+      <img [src]="getPostImageUrl(selectedPost, false)" alt="Post Image" class="post-image-detailed"/>
+    </div>
+
+    <div *ngIf="selectedPost?.url_overridden_by_dest">
+      <a [href]="selectedPost.url" target="_blank" rel="noopener noreferrer">
+        {{ selectedPost.url }}
+      </a>
     </div>
 
     <div class="comments-container" *ngIf="selectedPost.comments && selectedPost.comments.length">
@@ -60,6 +62,5 @@
         </li>
       </ul>
     </div>
-
   </div>
 </ng-container>
