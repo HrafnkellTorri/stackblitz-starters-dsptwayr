@@ -41,8 +41,7 @@
     <button (click)="closePostDetails()">Back</button>
     <h3>{{ selectedPost.title }}</h3>
     <p [style.color]="getUpvoteColor(selectedPost.ups)">▲ {{ selectedPost.ups }}</p>
-    <p>Comments: {{ selectedPost.num_comments }}</p>
-    <p>{{ selectedPost.selftext || '' }}</p>
+    <p [innerHTML]="formatSelfText(selectedPost.selftext)"></p>
 
     <div
       *ngIf="getPostImageUrl(selectedPost, false)"
@@ -54,7 +53,7 @@
     </div>
 
     <div class="comments-container" *ngIf="selectedPost.comments && selectedPost.comments.length">
-      <h4>Comments</h4>
+      <h4 *ngIf="selectedPost.num_comments > 1">Comments: {{ selectedPost.num_comments }}</h4>
       <ul>
         <li *ngFor="let comment of selectedPost.comments" class="comment">
           <p><strong class="comment-author">{{ comment.author }}</strong>: {{ comment.body }}</p>
@@ -62,8 +61,5 @@
       </ul>
     </div>
 
-    <div class="no-comments" *ngIf="!selectedPost.comments || !selectedPost.comments.length">
-      <p>No comments available.</p>
-    </div>
   </div>
 </ng-container>

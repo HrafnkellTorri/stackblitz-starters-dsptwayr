@@ -103,19 +103,6 @@ p {
   margin-top: 1rem;
   color: #d9534f;
   font-weight: bold;
-  animation: shake 0.1s ease-in-out;
-}
-
-@keyframes shake {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-5px);
-  }
-  75% {
-  }
 }
 
 .loading {

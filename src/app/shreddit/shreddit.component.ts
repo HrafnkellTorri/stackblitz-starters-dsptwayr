@@ -100,4 +100,17 @@ export class ShredditComponent implements OnInit {
   closePostDetails(): void {
     this.selectedPost = null;
   }
+
+  formatSelfText(selftext: string | null): string {
+    if (!selftext) {
+      return '';
+    }
+  
+    const urlRegex =
+      /(https?:\/\/[^\s]+)/g;
+  
+    return selftext.replace(urlRegex, (url) => {
+      return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+    });
+  }
 }
