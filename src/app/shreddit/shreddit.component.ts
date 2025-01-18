@@ -92,7 +92,10 @@ export class ShredditComponent implements OnInit {
   openPostDetails(post: any): void {
     this.selectedPost = post;
     this.url = post.url_overridden_by_dest;
-
+  
+    // disable background scrolling
+    document.body.style.overflow = 'hidden';
+  
     this.shredditService.getComments(post.id).subscribe(
       (data: any) => {
         this.selectedPost.comments = data[1]?.data?.children?.map(
@@ -105,9 +108,12 @@ export class ShredditComponent implements OnInit {
       }
     );
   }
-
+  
   closePostDetails(): void {
     this.selectedPost = null;
+  
+    // enable background scrolling after clicking outside box
+    document.body.style.overflow = '';
   }
 
   formatSelfText(selftext: string | null): string {
