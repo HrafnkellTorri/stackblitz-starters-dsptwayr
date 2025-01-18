@@ -1,0 +1,54 @@
+<div *ngIf="isLoading && !posts.length" class="spinner-container">
+  <div class="spinner"></div>
+</div>
+
+<div *ngIf="error && !posts.length" class="error-message">
+  <p>{{ error }}</p>
+</div>
+
+<div *ngIf="!isLoading && !posts.length && !error" class="empty-state">
+  <p>No posts available. Try again later.</p>
+</div>
+
+<ng-container *ngIf="!selectedPost">
+  <h2>Shreddit</h2>
+  <button (click)="navigate()">Log out</button>
+
+  <ul>
+    <li *ngFor="let post of posts" class="post" (click)="openPostDetails(post)">
+      <div class="post-details">
+        <h3>{{ post.title }}</h3>
+        <p [style.color]="getUpvoteColor(post.ups)">▲ {{ post.ups }}</p>
+        <p>Comments: {{ post.num_comments }}</p>
+      </div>
+
+      <div class="post-image-container">
+        <img
+          [src]="getPostImageUrl(post)"
+          alt="Post Image"
+          class="post-image"
+        />
+      </div>
+    </li>
+  </ul>
+</ng-container>
+
+<ng-container *ngIf="selectedPost">
+  <div class="post-details-container">
+    <button (click)="closePostDetails()">Back</button>
+    <h3>{{ selectedPost.title }}</h3>
+    <p [style.color]="getUpvoteColor(selectedPost.ups)">
+      ▲ {{ selectedPost.ups }}
+    </p>
+    <p>Comments: {{ selectedPost.num_comments }}</p>
+    <p>{{ selectedPost.selftext || 'No additional content available.' }}</p>
+
+    <div class="post-image-container">
+      <img
+        [src]="getPostImageUrl(selectedPost)"
+        alt="Post Image"
+        class="post-image"
+      />
+    </div>
+  </div>
+</ng-container>
