@@ -317,3 +317,37 @@ li:hover {
   color: rgb(53, 58, 149);
   margin-right: 0.5rem;
 }
+.subreddit-button {
+  position: relative;
+  background: linear-gradient(135deg, #1f247f, #353a95);
+  color: #fbfbfd;
+  border: none;
+  height: 50px;
+  top: 0px;
+  border-radius: 10px;
+  padding: 0 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.subreddit-button:hover {
+  background: linear-gradient(135deg, #353a95, #1f247f);
+  transform: translateY(-2px);
+}
+
+.subreddit-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.subreddit-input {
+  flex-grow: 1;
+  height: 50px;
+  padding: 0 15px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin: 15px;
+}

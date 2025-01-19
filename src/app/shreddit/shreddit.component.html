@@ -10,7 +10,20 @@
   <p>No posts available. Try again later.</p>
 </div>
 
-<ng-container *ngIf="!isLoading"> <h2 class="shreddit-logo">Shreddit</h2> </ng-container>
+<ng-container *ngIf="!isLoading">
+  <div class="subreddit-container">
+    <h2 class="shreddit-logo">Shreddit</h2>
+    <input 
+      type="text" 
+      placeholder="Enter subreddit name" 
+      [(ngModel)]="subredditName"
+      [value]="'angular2'"
+      (keyup.enter)="fetchPosts(true)"
+      class="subreddit-input"
+    />
+    <button class="subreddit-button" (click)="fetchPosts(true)">Go</button>
+  </div>
+</ng-container>
 
 <ng-container >
   <button (click)="navigate()">Log out</button>

@@ -1,1 +1,0 @@
-1. AUTH. I wanted to go in guns blazing and use a 3rd party service (clerk og auth0) but it brings in an extra layer of complexity and is perhaps outside of the project scope so i decided to just do a simple mock.

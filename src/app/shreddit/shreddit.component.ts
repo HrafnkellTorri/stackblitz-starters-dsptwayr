@@ -2,22 +2,23 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ShredditService } from '../services/shreddit.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-shreddit',
   templateUrl: './shreddit.component.html',
   styleUrls: ['./shreddit.component.css'],
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule, FormsModule],
   providers: [ShredditService],
 })
 export class ShredditComponent implements OnInit {
   posts: any[] = [];
-  after = '';
   isLoading = false;
   error: string | null = null;
   selectedPost: any = null;
   url: string | null = null;
+  subredditName: any | null = 'Angular2';
 
   constructor(private shredditService: ShredditService) {}
 
@@ -43,16 +44,18 @@ export class ShredditComponent implements OnInit {
     return /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/.test(url);
   }
 
-  fetchPosts(): void {
+  fetchPosts(clear: boolean = false): void {
     this.isLoading = true;
     this.error = null;
-    this.shredditService.getPosts(this.after).subscribe(
+    if (clear) {
+      this.posts = [];
+    }
+    this.shredditService.getPosts(this.subredditName).subscribe(
       (data: any) => {
         this.posts = [
           ...this.posts,
           ...data.data.children.map((child: any) => child.data),
         ];
-        this.after = data.data.after;
         this.isLoading = false;
       },
       (error) => {
